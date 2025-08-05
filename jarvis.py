@@ -19,7 +19,7 @@ class MyClient(discord.Client):
                 return
             
             try:
-                openai_client = OpenAI(api_key="OPEN_API_KEY")
+                openai_client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
                 response = openai_client.chat.completions.create(
                     model="gpt-4o-mini",
                     messages=[{"role": "user", "content": user_question}]
@@ -36,5 +36,5 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 client = MyClient(intents=intents)
-client.run('DISCORD_BOT_TOKEN')
+client.run(os.getenv('DISCORD_BOT_TOKEN'))
 
